@@ -6,29 +6,27 @@ class DishDetail extends Component {
         super(props);
 
         this.state = {
-            selectedDish: this.props.selectedDish
+
         }
     }
-
-    componentDidMount() {
-        console.log('Menu Component componentDidMount is invoked');
-    }
     
-    renderComments(dishComments){
-        console.log(dishComments);
-        if(dishComments != null){
-            return(
-                <ListGroup>
-                    <ListGroupItem>
-                        <p> {dishComments.comment} </p>
-                        <span> {dishComments.author} {dishComments.date} </span>
+    renderComments(selectedDish){
+        
+        if(selectedDish != null){
+            
+            selectedDish.comments.map((comment) => {
+                console.log(comment.comment);
+                return(
+                    <ListGroupItem id={comment.id} >
+                        <p> {comment.comment} </p>
+                        <span> {comment.author} {comment.date} </span>
                     </ListGroupItem>
-                </ListGroup>
-            )
+                );
+            });
         } else{
             return(
                 <div></div>
-            )
+            );
         }
     }
 
@@ -52,6 +50,7 @@ class DishDetail extends Component {
     }
 
     render() {
+
         // const comments = this.props.selectedDish.comments.map((comment) => {
         //     return(
         //         <ListGroupItem>
@@ -67,7 +66,9 @@ class DishDetail extends Component {
                     {this.renderDish(this.props.selectedDish)}
                 </div>
                 <div className="col-md-5 col-sm-12 m-1">
-                    {this.renderComments(this.props.selectedDish)}
+                    <ListGroup>
+                        {this.renderComments(this.props.selectedDish)}
+                    </ListGroup>
                 </div>
             </div>
         );
