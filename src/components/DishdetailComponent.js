@@ -14,8 +14,7 @@ class DishDetail extends Component {
         
         if(selectedDish != null){
             
-            selectedDish.comments.map((comment) => {
-                console.log(comment.comment);
+            let comments = selectedDish.comments.map((comment) => {
                 return(
                     <ListGroupItem id={comment.id} >
                         <p> {comment.comment} </p>
@@ -23,6 +22,8 @@ class DishDetail extends Component {
                     </ListGroupItem>
                 );
             });
+            return comments;    
+            
         } else{
             return(
                 <div></div>
@@ -66,6 +67,7 @@ class DishDetail extends Component {
                     {this.renderDish(this.props.selectedDish)}
                 </div>
                 <div className="col-md-5 col-sm-12 m-1">
+
                     <ListGroup>
                         {this.renderComments(this.props.selectedDish)}
                     </ListGroup>
