@@ -5,24 +5,32 @@ class DishDetail extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
+        
 
+        this.state = {
+            
         }
     }
     
-    renderComments(selectedDish){
+    renderComments(dish){
         
-        if(selectedDish != null){
-            
-            let comments = selectedDish.comments.map((comment) => {
+        if(dish != null){
+            // map comments into a variable
+            let comments = dish.comments.map((comment) => {
                 return(
-                    <ListGroupItem id={comment.id} >
+                    <ListGroupItem key={comment.id} >
                         <p> {comment.comment} </p>
-                        <span> {comment.author} {comment.date} </span>
+                        <p> -- {comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(comment.date)))} </p>
                     </ListGroupItem>
                 );
             });
-            return comments;    
+            // unordered list wich is populated with comments
+            const listOfComments =  <div>
+                                        <h4>Comments</h4>
+                                        <ListGroup>{comments}</ListGroup>
+                                    </div>;
+
+            return listOfComments;    
             
         } else{
             return(
@@ -31,14 +39,15 @@ class DishDetail extends Component {
         }
     }
 
-    renderDish(selectedDish){
-        if(selectedDish != null){
+    renderDish(dish){
+        console.log(dish);
+        if(dish != null){
             return(
                 <Card>
-                    <CardImg width="100%" src={selectedDish.image} alt={"selectedDish.name"} />
+                    <CardImg width="100%" src={dish.image} alt={"dish.name"} />
                     <CardBody>
-                        <CardTitle>{selectedDish.name}</CardTitle>
-                        <CardText>{selectedDish.description}</CardText>
+                        <CardTitle>{dish.name}</CardTitle>
+                        <CardText>{dish.description}</CardText>
                     </CardBody>
                 </Card>
             );
@@ -51,26 +60,15 @@ class DishDetail extends Component {
     }
 
     render() {
-
-        // const comments = this.props.selectedDish.comments.map((comment) => {
-        //     return(
-        //         <ListGroupItem>
-        //             <p> {comment.comment} </p>
-        //             <span> {comment.author} {comment.date} </span>
-        //         </ListGroupItem>
-        //     )
-        // });
-        
         return(
-            <div className="row">
-                <div className="col-md-5 col-sm-12 m-1">
-                    {this.renderDish(this.props.selectedDish)}
-                </div>
-                <div className="col-md-5 col-sm-12 m-1">
-
-                    <ListGroup>
-                        {this.renderComments(this.props.selectedDish)}
-                    </ListGroup>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-5 col-sm-12 m-1">
+                        {this.renderDish(this.props.dish)}
+                    </div>
+                    <div className="col-md-5 col-sm-12 m-1">
+                        {this.renderComments(this.props.dish)}
+                    </div>
                 </div>
             </div>
         );

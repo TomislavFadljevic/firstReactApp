@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -20,6 +20,16 @@
 
 .App-link {
   color: #61dafb;
+}
+
+
+
+
+/* custom css */
+.list-group-item {
+  padding-left: 0;
+  padding-right: 0;
+  border: none!important;
 }
 
 @keyframes App-logo-spin {
