@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentForm';
 
     // componentDidMount() {
     //     console.log('Dishdetail Component componentDidMount is invoked');
@@ -25,6 +26,7 @@ import { Link } from 'react-router-dom';
             const listOfComments =  <div>
                                         <h4>Comments</h4>
                                         <ListGroup>{commentsArr}</ListGroup>
+                                        <CommentForm></CommentForm>
                                     </div>;
 
             return listOfComments;
