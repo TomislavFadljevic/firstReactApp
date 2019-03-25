@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Label, Col, Row } from 'reactstrap';
-import { Control, LocalForm, Errors, FormGroup } from 'react-redux-form';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => (val) && (val.length >= len);
@@ -25,8 +25,8 @@ class CommentForm extends Component {
     }
 
     handleSubmit(values) {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
+        this.toggleModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -55,14 +55,14 @@ class CommentForm extends Component {
                             </Row>
                             <Row className="form-group">
                                 <Col md={12}>
-                                    <Label htmlFor="yourname">Your Name</Label>
-                                    <Control.text model=".yourname" id="yourname" name="yourname" 
+                                    <Label htmlFor="author">Your Name</Label>
+                                    <Control.text model=".author" id="author" name="yourname" 
                                         placeholder="Write Your Name"
                                         className="form-control"
                                         validators={{ minLength: minLength(3), maxLength: maxLength(15) }} />
                                     <Errors 
                                         className="text-danger"
-                                        model=".yourname"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             minLength: "Name must be greater than 2 characters",

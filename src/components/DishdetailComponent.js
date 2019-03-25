@@ -10,7 +10,7 @@ import CommentForm from './CommentForm';
     //     console.log('Dishdetail Component componentDidUpdate is invoked');
     // }
     
-    function RenderComments({comments}){
+    function RenderComments({comments, addComment, dishId}){
         
         if(comments != null){
             // map comments into a variable
@@ -26,7 +26,7 @@ import CommentForm from './CommentForm';
             const listOfComments =  <div>
                                         <h4>Comments</h4>
                                         <ListGroup>{commentsArr}</ListGroup>
-                                        <CommentForm></CommentForm>
+                                        <CommentForm dishId={dishId} addComment={addComment}></CommentForm>
                                     </div>;
 
             return listOfComments;
@@ -77,7 +77,9 @@ import CommentForm from './CommentForm';
                             <RenderDish dish = {props.dish} />
                         </div>
                         <div className="col-md-5 col-sm-12 m-1">
-                            <RenderComments comments = {props.comments} />
+                            <RenderComments comments = {props.comments}
+                                addComment={props.addComment}
+                                dishId={props.dish.id} />
                         </div>
                     </div>
                 </div>
